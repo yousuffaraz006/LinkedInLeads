@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+        integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
     <title>Simple Input Page</title>
     <style>
         /* Basic reset and body styling */
-        html, body {
+        html,
+        body {
             /* height: 100%; */
             margin: 0;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -43,7 +45,8 @@
             margin-bottom: 15px;
             font-size: 16px;
             resize: vertical;
-            box-sizing: border-box; /* Ensures padding doesn't affect width */
+            box-sizing: border-box;
+            /* Ensures padding doesn't affect width */
         }
 
         /* Button styling */
@@ -65,36 +68,27 @@
         }
     </style>
 </head>
-<body>
 
+<body>
     <div class="container">
         <h2 class="mb-4">Demo for Limbic Labs</h2>
         <textarea id="prompt-input" placeholder="Enter your text here..."></textarea>
-        <div>
-            <button id="send-button" class="btn btn-lg btn-primary">Send</button>
-        </div>
-
+        <button id="send-button" class="btn btn-lg btn-primary">Send</button>
         <div id="airtable-container" style="margin-top: 20px; width: 100%;" class="row">
             <div class="col">
                 <h1>Companies</h1>
-                <iframe 
-                    class="airtable-embed" 
-                    src="https://airtable.com/embed/appJuyeGs8KOb0fy3/shrgIZr3xjNcIMhCS?layout=card&viewControls=on" frameborder="0" 
-                    onmousewheel=""  
-                    width="100%"
-                    height="533" 
+                <iframe class="airtable-embed"
+                    src="https://airtable.com/embed/appJuyeGs8KOb0fy3/shrgIZr3xjNcIMhCS?layout=card&viewControls=on"
+                    frameborder="0" onmousewheel="" width="100%" height="533"
                     style="background: transparent; border: 1px solid #ccc;"
                     allow="autoplay; camera; microphone; geolocation; payment 'none';">
                 </iframe>
             </div>
             <div class="col">
                 <h1>Individuals</h1>
-                <iframe 
-                    class="airtable-embed" 
-                    src="https://airtable.com/embed/appJuyeGs8KOb0fy3/shrNcThoax4x6PgyW?layout=card&viewControls=on" frameborder="0" 
-                    onmousewheel=""  
-                    width="100%"
-                    height="533" 
+                <iframe class="airtable-embed"
+                    src="https://airtable.com/embed/appJuyeGs8KOb0fy3/shrNcThoax4x6PgyW?layout=card&viewControls=on"
+                    frameborder="0" onmousewheel="" width="100%" height="533"
                     style="background: transparent; border: 1px solid #ccc;"
                     allow="autoplay; camera; microphone; geolocation; payment 'none';">
                 </iframe>
@@ -107,21 +101,17 @@
         const textArea = document.getElementById('prompt-input');
         const airtableContainer = document.getElementById('airtable-container');
 
-        sendButton.addEventListener('click', function() {
+        sendButton.addEventListener('click', function () {
             const text = textArea.value.trim();
-
             // 1. Don't send if the input is empty
             if (!text) {
                 return;
             }
-
             // The URL to send the data to.
             const targetUrl = 'https://yousuf132.app.n8n.cloud/webhook/c4c151bd-9861-454f-8f42-c32646655432';
-
             // 2. Disable button and show sending state
             sendButton.disabled = true;
             sendButton.textContent = 'Sending...';
-
             // Using the Fetch API to send the data as a POST request.
             fetch(targetUrl, {
                 method: 'POST',
@@ -135,17 +125,18 @@
                 // Clear the textarea after the request is sent.
                 textArea.value = '';
             })
-            .catch(error => {
-                console.error('Error sending prompt:', error);
-                // 3. Optionally, inform the user that something went wrong
-                alert('There was an error sending your prompt. Please try again.');
-            })
-            .finally(() => {
-                // 4. Re-enable the button and restore its text, regardless of success or failure
-                sendButton.disabled = false;
-                sendButton.textContent = 'Send';
-            });
+                .catch(error => {
+                    console.error('Error sending prompt:', error);
+                    // 3. Optionally, inform the user that something went wrong
+                    alert('There was an error sending your prompt. Please try again.');
+                })
+                .finally(() => {
+                    // 4. Re-enable the button and restore its text, regardless of success or failure
+                    sendButton.disabled = false;
+                    sendButton.textContent = 'Send';
+                });
         });
     </script>
 </body>
+
 </html>
