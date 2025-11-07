@@ -63,23 +63,18 @@
         #send-button:hover {
             background-color: #0056b3;
         }
-
-        /* Class to hide the table */
-        .hidden {
-            display: none;
-        }
     </style>
 </head>
 <body>
 
     <div class="container">
+        <h2 class="mb-4">Demo for Limbic Labs</h2>
         <textarea id="prompt-input" placeholder="Enter your text here..."></textarea>
         <div>
             <button id="send-button" class="btn btn-lg btn-primary">Send</button>
-            <button id="toggle-table-button" style="margin-left: 10px;" class="btn btn-lg btn-info">Show Data</button>
         </div>
 
-        <div id="airtable-container" style="margin-top: 20px; width: 100%;" class="row hidden">
+        <div id="airtable-container" style="margin-top: 20px; width: 100%;" class="row">
             <div class="col">
                 <h1>Companies</h1>
                 <iframe 
@@ -110,7 +105,6 @@
     <script>
         const sendButton = document.getElementById('send-button');
         const textArea = document.getElementById('prompt-input');
-        const toggleButton = document.getElementById('toggle-table-button');
         const airtableContainer = document.getElementById('airtable-container');
 
         sendButton.addEventListener('click', function() {
@@ -151,10 +145,6 @@
                 sendButton.disabled = false;
                 sendButton.textContent = 'Send';
             });
-        });
-
-        toggleButton.addEventListener('click', function() {
-            airtableContainer.classList.toggle('hidden');
         });
     </script>
 </body>
